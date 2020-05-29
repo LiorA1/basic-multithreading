@@ -13,16 +13,17 @@ public class Main
 
         for(int i = 0; i < 5; i++)
         {
-            executor.submit(new Processor(i));
+            executor.submit(new Processor(i));// Send a new Runnable to the pool.
         }
 
-        executor.shutdown(); // wait
+        executor.shutdown(); // Wait for all submit to be received.  
 
         System.out.println("All tasks submiteed");
 
         try
         {
-            executor.awaitTermination(1, TimeUnit.HOURS);
+			// Wait for all the 'Tasks' assigned to the pool to been over.
+            executor.awaitTermination(1, TimeUnit.HOURS); 
         }
         catch (InterruptedException e)
         {
@@ -35,6 +36,7 @@ public class Main
     }
 }
 
+// 
 class Processor implements Runnable
 {
     private int _id;
